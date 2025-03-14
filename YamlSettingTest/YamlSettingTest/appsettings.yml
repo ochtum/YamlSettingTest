@@ -1,0 +1,17 @@
+﻿authentication:
+  azureAd:
+    aadInstance: https://login.microsoftonline.com/
+    domain: test.onmicrosoft.com
+    tenantId: test-id
+    clientId: FROM appsettings.yml
+    clientSecret:
+    callbackPath:
+      - /signin-oidc
+      - /signin-oidc2
+    callbackPath2: ["/signin-oidc", "/signin-oidc2"]
+    callbackPath3: [
+      "/signin-oidc", "/signin-oidc2"]
+    callbackPath4: ["/signin-oidc",
+      "/signin-oidc", "/signin-oidc2"]
+    logfilepath: I:\source
+    origin: https://localhost:44300,https://localhost:44301
