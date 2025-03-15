@@ -95,8 +95,7 @@ namespace YamlSettingTest.Modules
 
                             section += ":" + listSection;
                             parts = line.Trim().Split('-', 2);
-                            itemList = new List<string>();
-                            itemList.Add(parts[1].Trim());
+                            itemList = [parts[1].Trim()];
                             result[section] = itemList;
                         }
                         else

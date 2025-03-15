@@ -1,0 +1,59 @@
+﻿@page "/yamlconfig"
+@inject YamlSettingTest.Services.IYamlConfigService _config
+
+<PageTitle>YamlConfigSample</PageTitle>
+
+<h1>YamlConfigSample</h1>
+
+<p>This component demonstrates showing data.</p>
+
+@if (configs == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    @cofigString
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var config in configs)
+            {
+                <tr>
+                    <td>@config.Key</td>
+                    <td>@(new MarkupString(config.Value))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private YamlConfigData[]? configs;
+    private string? cofigString;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate asynchronous loading to demonstrate streaming rendering
+        await Task.Delay(500);
+
+        var config = _config.GetConfiguration();
+
+        configs = config.Select(item => new YamlConfigData
+            {
+                Key = item.Key,
+                Value = item.Value is List<string> list ? string.Join("<br/>", list) : item.Value?.ToString() ?? string.Empty
+            }).ToArray();
+    }
+
+    private class YamlConfigData
+    {
+        public string? Key { get; set; }
+        public string? Value { get; set; }
+    }
+}
